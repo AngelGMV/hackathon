@@ -19,7 +19,7 @@ function App() {
             <Route path="/nosotros" element={<Nostros />} />
             <Route path="/nuestros-paquetes" element={<NuestrosPaquetes />} />
             <Route path="/mis-eventos" element={<MisEventos />} />
-             <Route path="/calendario" element={<Calendario />} />
+            <Route path="/calendario" element={<Calendario />} />
           </Routes>
         </main>
       </div>
