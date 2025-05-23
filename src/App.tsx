@@ -9,10 +9,9 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
-        {/* Header siempre visible */}
         <Header />
 
-        {/* Contenido que cambia según la ruta */}
+
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Inicio />} />
