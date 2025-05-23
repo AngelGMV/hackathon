@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useEventoStore } from '../store/useEventoStore';
 
 const menus = {
   Platillos: [
@@ -25,22 +26,50 @@ const menus = {
 };
 
 export default function MisEventos() {
-  const [categoria, setCategoria] = useState<keyof typeof menus>('Platillos');
-  const [seleccionados, setSeleccionados] = useState<{ nombre: string; precio: number; imagen: string }[]>([]);
+  const {
+    fecha,
+    horaInicio,
+    ubicacion,
+    invitados,
+    duracion,
+    tipoEvento,
+    seleccionados,
+    toggleSeleccionado
+  } = useEventoStore();
 
-  const togglePlatillo = (item: { nombre: string; precio: number; imagen: string }) => {
-    setSeleccionados((prev) =>
-      prev.some((p) => p.nombre === item.nombre)
-        ? prev.filter((p) => p.nombre !== item.nombre)
-        : [...prev, item]
-    );
+  const [categoria, setCategoria] = useState<keyof typeof menus>('Platillos');
+
+  const guardarEvento = async () => {
+    const payload = {
+      fecha,
+      horaInicio,
+      ubicacion,
+      invitados,
+      duracion,
+      tipoEvento,
+      seleccionados,
+    };
+
+    try {
+      const res = await fetch("http://localhost:3001/api/eventos/completo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      alert("Evento guardado con éxito. ID: " + data.insertId);
+    } catch (err) {
+      console.error("Error al guardar evento:", err);
+      alert("Hubo un error al guardar el evento.");
+    }
   };
 
   return (
     <div className="flex min-h-screen bg-[#ebebd3]">
       {/* Menú lateral */}
       <div className="w-[200px] bg-[#083d77] text-white p-4 space-y-3">
-        <h2 className="text-lg font-bold mb-4">Menú</h2>
+        <h2 className="text-lg font-bold mb-4">Categorías</h2>
         {Object.keys(menus).map((cat) => (
           <button
             key={cat}
@@ -56,10 +85,21 @@ export default function MisEventos() {
 
       {/* Contenido principal */}
       <div className="flex-1 p-6">
-        <h1 className="text-3xl font-body font-semibold text-black mb-4">Nuestros {categoria.toLowerCase()}</h1>
-        <div className="flex gap-6 items-start">
-        {/* Product Grid */}
-        <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <h1 className="text-3xl font-body font-semibold text-black mb-4">Menú para {tipoEvento}</h1>
+
+        {/* Datos del evento */}
+        <div className="bg-white shadow p-4 rounded mb-6 text-gray-700">
+          <p><strong>Fecha:</strong> {fecha}</p>
+          <p><strong>Hora:</strong> {horaInicio}</p>
+          <p><strong>Duración:</strong> {duracion} horas</p>
+          <p><strong>Ubicación:</strong> {ubicacion}</p>
+          <p><strong>Invitados:</strong> {invitados}</p>
+          <p><strong>Tipo de evento:</strong> {tipoEvento}</p>
+        </div>
+
+        {/* Grid de selección */}
+        <h2 className="text-xl font-bold mb-3 text-black">Selecciona {categoria.toLowerCase()}:</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {menus[categoria].map((item) => (
             <div
               key={item.nombre}
@@ -82,7 +122,7 @@ export default function MisEventos() {
         <div className="w-[300px] bg-white p-4 rounded shadow">
           <h2 className="text-xl font-bold mb-2">Cotización:</h2>
           {seleccionados.length === 0 ? (
-            <p className="italic">Aún no has seleccionado ningún platillo o servicio.</p>
+            <p className="italic text-gray-600">Aún no has seleccionado ningún platillo o servicio.</p>
           ) : (
             <div>
               <ul className="list-disc pl-5 mb-2">
@@ -96,6 +136,16 @@ export default function MisEventos() {
             </div>
           )}
           </div>
+        </div>
+
+        {/* Botón para guardar */}
+        <div className="mt-8">
+          <button
+            onClick={guardarEvento}
+            className="bg-[#083d77] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#062d50] transition"
+          >
+            Finalizar evento
+          </button>
         </div>
       </div>
     </div>
