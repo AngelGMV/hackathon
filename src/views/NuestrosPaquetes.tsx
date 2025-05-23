@@ -6,7 +6,7 @@ import paqueteBasico from '../assets/img/paqueteBasico.jpeg';
 export default function NuestrosPaquetes() {
   return (
     <div className="bg-[#ebebd3] w-full min-h-screen flex flex-col items-center">
-      <p className="text-black font-body text-center text-5xl mt-10 mb-6">
+      <p className="text-black font-body text-center text-7xl mt-10 mb-6">
         Nuestros Paquetes
       </p>
 
