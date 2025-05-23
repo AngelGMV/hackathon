@@ -2,6 +2,7 @@ import Packages from "../components/Packages";
 import paqueteEmpresarial from '../assets/img/paqueteEmpresarial.jpeg';
 import paqueteBoda from '../assets/img/paqueteBoda.jpeg';
 import paqueteBasico from '../assets/img/paqueteBasico.jpeg';
+import Footer from "../components/Footer";
 
 export default function NuestrosPaquetes() {
   return (
@@ -17,6 +18,7 @@ export default function NuestrosPaquetes() {
           <Packages eventType="Boda" imgEventType={paqueteBoda} />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
