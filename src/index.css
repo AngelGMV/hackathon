@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
 @theme {  
-  
+  --font-body: "Ancizar Serif", sans-serif;
+  --font-header:"Ancizar sans",sans-serif;
 }

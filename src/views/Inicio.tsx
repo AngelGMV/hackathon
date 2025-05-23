@@ -1,4 +1,5 @@
-
+import RedesSociales from "../components/RedesSociales";
+import { Link } from "react-router-dom";
 export default function Inicio() {
   return (
     <div className="bg-[#ebebd3] w-full min-h-screen flex items-center justify-center">
@@ -7,13 +8,16 @@ export default function Inicio() {
           EL BANQUETE QUE <br />
           TU EVENTO MERECE
         </p>
-
-        <p className="text-xl md:text-2xl mt-10">
-          El mejor evento <br />
-          empieza con un clic
-        </p>
+        <div className="mt-5">
+          <Link to="/calendario" className="mt-1 rounded-2xl bg-[#DA4167] w-50 h-15 text-white text-2xl pl-5 pr-5 pt-3 pb-3">
+            Cotizar ahora
+          </Link>
+        </div>
+        <div className="h-10"></div>
+        <RedesSociales />
       </div>
     </div>
+
 
   )
 }
