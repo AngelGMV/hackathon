@@ -11,16 +11,16 @@ const menus = {
     { nombre: 'Pechuga con Salsa de cilantro', imagen: 'src/assets/img/cilantro.jpeg' }
   ],
   Postres: [
-    { nombre: 'Pastel de chocolate', imagen: '/img/pastel.jpg' },
-    { nombre: 'Flan napolitano', imagen: '/img/flan.jpg' }
+    { nombre: 'Pastel de chocolate', imagen: 'src/assets/img/chocolate.jpeg' },
+    { nombre: 'Flan napolitano', imagen: 'src/assets/img/flan.jpeg' }
   ],
   'Postres salados': [
-    { nombre: 'Queso relleno', imagen: '/img/queso.jpg' },
-    { nombre: 'Tartaleta de espinaca', imagen: '/img/tartaleta.jpg' }
+    { nombre: 'Queso relleno', imagen: 'src/assets/img/queso.jpeg' },
+    { nombre: 'Tartaleta de espinaca', imagen: 'src/assets/img/tartaleta.jpeg' }
   ],
   'Servicios adicionales': [
-    { nombre: 'Decoración floral', imagen: '/img/flores.jpg' },
-    { nombre: 'DJ en vivo', imagen: '/img/dj.jpg' }
+    { nombre: 'Decoración floral', imagen: 'src/assets/img/flores.jpeg' },
+    { nombre: 'DJ en vivo', imagen: 'src/assets/img/dj.jpeg' }
   ]
 };
 
