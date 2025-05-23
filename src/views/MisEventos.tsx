@@ -2,8 +2,13 @@ import { useState } from 'react';
 
 const menus = {
   Platillos: [
-    { nombre: 'Lomo de cerdo', imagen: '/img/cerdo.jpg' },
-    { nombre: 'Pechuga al mole', imagen: '/img/mole.jpg' }
+    { nombre: 'Lomo de cerdo', imagen: 'src/assets/img/cerdo.jpeg' },
+    { nombre: 'Lomo de res', imagen: 'src/assets/img/res.jpeg' },
+    { nombre: 'Lomo de pollo', imagen: 'src/assets/img/pollo.jpeg' },
+    { nombre: 'Pechuga al mole', imagen: 'src/assets/img/mole.jpeg' },
+    { nombre: 'Pechuga al pistache', imagen: 'src/assets/img/pistache.jpeg' },
+    { nombre: 'Pechuga Almendrada', imagen: 'src/assets/img/almendrada.jpeg' },
+    { nombre: 'Pechuga con Salsa de cilantro', imagen: 'src/assets/img/cilantro.jpeg' }
   ],
   Postres: [
     { nombre: 'Pastel de chocolate', imagen: '/img/pastel.jpg' },
@@ -65,7 +70,7 @@ export default function MisEventos() {
               <img
                 src={item.imagen}
                 alt={item.nombre}
-                className="w-full h-20 object-cover rounded"
+                className="w-full h-full object-cover rounded"
               />
               <p className="text-center mt-2">{item.nombre}</p>
             </div>
