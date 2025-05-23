@@ -7,9 +7,9 @@ interface EventoStore {
   ubicacion: string;
   invitados: number;
   tipoEvento: string;
-  seleccionados: string[];
+  seleccionados: { nombre: string; precio: number; imagen: string }[];
   setEvento: (data: Partial<EventoStore>) => void;
-  toggleSeleccionado: (item: string) => void;
+  toggleSeleccionado: (item: { nombre: string; precio: number; imagen: string }) => void;
 }
 
 export const useEventoStore = create<EventoStore>((set) => ({

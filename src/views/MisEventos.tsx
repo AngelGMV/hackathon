@@ -85,69 +85,74 @@ export default function MisEventos() {
 
       {/* Contenido principal */}
       <div className="flex-1 p-6">
-        <h1 className="text-3xl font-body font-semibold text-black mb-4">Menú para {tipoEvento}</h1>
+  <h1 className="text-3xl font-body font-semibold text-black mb-4">Menú para {tipoEvento}</h1>
 
-        {/* Datos del evento */}
-        <div className="bg-white shadow p-4 rounded mb-6 text-gray-700">
-          <p><strong>Fecha:</strong> {fecha}</p>
-          <p><strong>Hora:</strong> {horaInicio}</p>
-          <p><strong>Duración:</strong> {duracion} horas</p>
-          <p><strong>Ubicación:</strong> {ubicacion}</p>
-          <p><strong>Invitados:</strong> {invitados}</p>
-          <p><strong>Tipo de evento:</strong> {tipoEvento}</p>
-        </div>
+  {/* Datos del evento */}
+  <div className="bg-white shadow p-4 rounded mb-6 text-gray-700">
+    <p><strong>Fecha:</strong> {fecha}</p>
+    <p><strong>Hora:</strong> {horaInicio}</p>
+    <p><strong>Duración:</strong> {duracion} horas</p>
+    <p><strong>Ubicación:</strong> {ubicacion}</p>
+    <p><strong>Invitados:</strong> {invitados}</p>
+    <p><strong>Tipo de evento:</strong> {tipoEvento}</p>
+  </div>
 
-        {/* Grid de selección */}
-        <h2 className="text-xl font-bold mb-3 text-black">Selecciona {categoria.toLowerCase()}:</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {menus[categoria].map((item) => (
-            <div
-              key={item.nombre}
-              onClick={() => togglePlatillo(item)}
-              className={`border-2 p-2 rounded cursor-pointer transition ${
-                seleccionados.includes(item) ? 'border-blue-600' : 'border-transparent'
+  {/* Contenedor con selección y cotización */}
+  <div className="flex gap-6 items-start">
+    {/* Grid de selección */}
+    <div className="flex-1">
+      <h2 className="text-xl font-bold mb-3 text-black">Selecciona {categoria.toLowerCase()}:</h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        {menus[categoria].map((item) => (
+          <div
+            key={item.nombre}
+            onClick={() => toggleSeleccionado(item)}
+            className={`border-2 p-2 rounded cursor-pointer transition ${
+              seleccionados.includes(item) ? 'border-blue-600' : 'border-transparent'
             } hover:border-blue-400`}
-            >
-              <img
-                src={item.imagen}
-                alt={item.nombre}
-                className="w-full h-full object-cover rounded"
-              />
-              <p className="text-center mt-2">{item.nombre}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Cotización box */}
-        <div className="w-[300px] bg-white p-4 rounded shadow">
-          <h2 className="text-xl font-bold mb-2">Cotización:</h2>
-          {seleccionados.length === 0 ? (
-            <p className="italic text-gray-600">Aún no has seleccionado ningún platillo o servicio.</p>
-          ) : (
-            <div>
-              <ul className="list-disc pl-5 mb-2">
-                {seleccionados.map((elemento) => (
-                  <li key={elemento.nombre}>{elemento.nombre} (${elemento.precio})</li>
-                ))}
-              </ul>
-              <p className="font-bold">
-                Total: ${seleccionados.reduce((total, item) => total + item.precio, 0)}
-              </p>
-            </div>
-          )}
-          </div>
-        </div>
-
-        {/* Botón para guardar */}
-        <div className="mt-8">
-          <button
-            onClick={guardarEvento}
-            className="bg-[#083d77] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#062d50] transition"
           >
-            Finalizar evento
-          </button>
-        </div>
+            <img
+              src={item.imagen}
+              alt={item.nombre}
+              className="w-full h-full object-cover rounded"
+            />
+            <p className="text-center mt-2">{item.nombre}</p>
+          </div>
+        ))}
       </div>
     </div>
+
+    {/* Cotización + botón */}
+    <div className="w-[300px] sticky top-6 self-start space-y-4">
+      <div className="bg-white p-4 rounded shadow">
+        <h2 className="text-xl font-bold mb-2">Cotización:</h2>
+        {seleccionados.length === 0 ? (
+          <p className="italic text-gray-600">Aún no has seleccionado ningún platillo o servicio.</p>
+        ) : (
+          <div>
+            <ul className="list-disc pl-5 mb-2">
+              {seleccionados.map((item) => (
+                <li key={item.nombre}>{item.nombre} (${item.precio})</li>
+              ))}
+            </ul>
+            <p className="font-bold">
+              Total: ${seleccionados.reduce((total, item) => total + item.precio, 0)}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Botón para guardar */}
+      <button
+        onClick={guardarEvento}
+        className="w-full bg-[#083d77] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#062d50] transition"
+      >
+        Finalizar evento
+      </button>
+    </div>
+  </div>
+  </div>
+  </div>
+  
   );
 }
