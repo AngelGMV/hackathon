@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import { useEventoStore } from "../store/useEventoStore";
 import Packages from "../components/Packages";
 import paqueteEmpresarial from '../assets/img/paqueteEmpresarial.jpeg';
 import paqueteBoda from '../assets/img/paqueteBoda.jpeg';
@@ -10,9 +12,17 @@ import {
 import Footer from "../components/Footer";
 
 export default function NuestrosPaquetes() {
+  const navigate = useNavigate();
+  const setEvento = useEventoStore((state) => state.setEvento);
+
+  // Función para manejar selección de paquete
+  const seleccionarTipo = (tipoEvento: string) => {
+    setEvento({ tipoEvento }); // ← guarda en el store
+    navigate("/mis-eventos");
+  };
+
   return (
     <div className="bg-[#ebebd3] min-h-screen flex flex-col">
-      {/* Contenido principal */}
       <main className="flex-grow flex flex-col items-center pt-10">
         <h1 className="text-black font-body text-center text-5xl md:text-7xl mb-8">
           Nuestros Paquetes
@@ -24,22 +34,24 @@ export default function NuestrosPaquetes() {
               eventType="Banquete Básico"
               imgEventType={paqueteBasico}
               description={descripcionBasico}
+              onClick={() => seleccionarTipo("Banquete Básico")}
             />
             <Packages
               eventType="Empresarial"
               imgEventType={paqueteEmpresarial}
               description={descripcionEmpresarial}
+              onClick={() => seleccionarTipo("Empresarial")}
             />
             <Packages
               eventType="Boda"
               imgEventType={paqueteBoda}
               description={descripcionBoda}
+              onClick={() => seleccionarTipo("Boda")}
             />
           </div>
         </div>
       </main>
 
-      {/* Footer fijo al final */}
       <footer className="w-full">
         <Footer />
       </footer>

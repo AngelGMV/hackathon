@@ -3,23 +3,38 @@ import { useState, type JSX } from "react";
 interface PackagesProps {
   eventType: string;
   imgEventType: string;
-  description: JSX.Element; 
+  description: JSX.Element;
+  onClick?: () => void; // ← Nueva prop opcional
 }
 
-const Packages: React.FC<PackagesProps> = ({ eventType, imgEventType, description }) => {
+const Packages: React.FC<PackagesProps> = ({ eventType, imgEventType, description, onClick }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
       <div className="flex flex-col items-center text-center bg-[#083d77] hover:bg-[#da4167] rounded-xl w-[300px] h-[450px] p-4 shadow-md">
-        <img src={imgEventType} alt={eventType} className="w-full h-[250px] object-cover rounded-md mb-3" />
-        <div className="text-white text-3xl font-semibold capitalize mb-8">{eventType}</div>
-        <button
-          className="bg-white text-[#083d77] w-65  h-10 rounded-full px-4 py-1 text-2xl font-semibold hover:bg-gray-100 transition"
-          onClick={() => setShowModal(true)}
-        >
-          + Info
-        </button>
+        <img
+          src={imgEventType}
+          alt={eventType}
+          className="w-full h-[250px] object-cover rounded-md mb-3"
+        />
+        <div className="text-white text-3xl font-semibold capitalize mb-4">{eventType}</div>
+
+        <div className="flex flex-col gap-2 w-full">
+          <button
+            className="bg-white text-[#083d77] rounded-full px-4 py-1 text-lg font-semibold hover:bg-gray-100 transition"
+            onClick={() => setShowModal(true)}
+          >
+            + Info
+          </button>
+
+          <button
+            className="bg-[#da4167] text-white rounded-full px-4 py-1 text-lg font-semibold hover:bg-[#c13255] transition"
+            onClick={onClick}
+          >
+            Seleccionar
+          </button>
+        </div>
       </div>
 
       {showModal && (

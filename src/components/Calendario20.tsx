@@ -1,9 +1,13 @@
 import { useState } from "react";
 import dayjs from "dayjs";
-import "dayjs/locale/es"; // Para español
+import "dayjs/locale/es";
 dayjs.locale("es");
 
-const Calendario20 = () => {
+type Calendario20Props = {
+  onChange?: (value: string) => void; // ← nueva prop
+};
+
+const Calendario20 = ({ onChange }: Calendario20Props) => {
   const [fechaActual, setFechaActual] = useState(dayjs());
   const [fechaSeleccionada, setFechaSeleccionada] = useState<dayjs.Dayjs | null>(null);
 
@@ -25,6 +29,13 @@ const Calendario20 = () => {
 
   const cambiarMes = (offset: number) => {
     setFechaActual(fechaActual.add(offset, "month"));
+  };
+
+  const seleccionarFecha = (fecha: dayjs.Dayjs) => {
+    setFechaSeleccionada(fecha);
+    if (onChange) {
+      onChange(fecha.format("YYYY-MM-DD")); // formato compatible con inputs de fecha
+    }
   };
 
   return (
@@ -52,7 +63,7 @@ const Calendario20 = () => {
           return (
             <button
               key={d.format("DD-MM-YYYY")}
-              onClick={() => setFechaSeleccionada(d)}
+              onClick={() => seleccionarFecha(d)}
               className={`text-sm rounded-full w-8 h-8 mx-auto
                 ${fueraDeMes ? "text-gray-300" : esDomingo ? "text-red-500" : "text-black"}
                 ${seleccionado ? "bg-red-500 text-white font-bold" : "hover:bg-red-100"}
